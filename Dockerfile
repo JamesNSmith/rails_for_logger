@@ -1,4 +1,4 @@
-FROM ruby:2.5
+FROM ruby:2.3
 RUN apt-get update -qq && apt-get install -y nodejs mysql-client
 RUN mkdir /myapp
 WORKDIR /myapp
