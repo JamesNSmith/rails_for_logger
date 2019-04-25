@@ -26,15 +26,16 @@ FROM ruby:2.3
 #RUN gem install bundler
 
 #Rails
-#RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
-    #&& sudo apt-get install -y nodejs
+#RUN curl -sL https://deb.nodesource.com/setup_8.x | -E bash - \
+    #&& apt-get install -y nodejs
 
-#RUN gem install rails -v 5.2.2 #5.1.7
+RUN gem install rails -v 5.2.2 #5.1.7
 
 #RUN rbenv rehash
 
-#RUN rails -v
+RUN rails -v
 
+#mysql
 #RUN sudo apt-get install mysql-server mysql-client libmysqlclient-dev
 
 #EXPOSE 3000
