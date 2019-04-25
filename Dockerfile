@@ -1,3 +1,4 @@
+FROM buildpack-deps:stretch
 #Ruby
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
@@ -39,11 +40,18 @@ EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
 #Git
-git config --global color.ui true
-git config --global user.name "YOUR NAME"
-git config --global user.email "YOUR@EMAIL.com"
-ssh-keygen -t rsa -b 4096 -C "YOUR@EMAIL.com"
+#git config --global color.ui true
+#git config --global user.name "YOUR NAME"
+#git config --global user.email "YOUR@EMAIL.com"
+#ssh-keygen -t rsa -b 4096 -C "YOUR@EMAIL.com"
 
-cat ~/.ssh/id_rsa.pub
-ssh -T git@github.com
+#cat ~/.ssh/id_rsa.pub
+#ssh -T git@github.com
+
+#FROM ruby:2.3
+
+#WORKDIR /usr/src/app
+#COPY Gemfile* ./
+#RUN bundle install
+#COPY . .
 
