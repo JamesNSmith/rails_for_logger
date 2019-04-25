@@ -17,7 +17,7 @@ EXPOSE 3000
 RUN rails -v
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
-#FROM ruby:2.3
+#FROM ruby:2.3#
 #FROM buildpack-deps:stretch
 #Ruby
 #RUN curl -sL https://deb.nodesource.com/setup_8.x \
