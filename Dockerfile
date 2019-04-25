@@ -36,7 +36,7 @@ RUN gem install rails -v 5.2.2 #5.1.7
 RUN rails -v
 
 #mysql
-RUN apt-get install mysql-server mysql-client libmysqlclient-dev
+#RUN apt-get install mysql-server mysql-client libmysqlclient-dev
 
 #EXPOSE 3000
 #CMD ["rails", "server", "-b", "0.0.0.0"]
