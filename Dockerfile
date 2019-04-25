@@ -1,5 +1,5 @@
 FROM ruby:2.3
-RUN apt-get update -qq && apt-get install -y nodejs mysql-client
+RUN apt-get update -qq && apt-get install -y nodejs mysql-client apt-utils
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
@@ -14,6 +14,7 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
 # Start the main process.
+RUN rails -v
 CMD ["rails", "server", "-b", "0.0.0.0"]
 
 #FROM ruby:2.3
