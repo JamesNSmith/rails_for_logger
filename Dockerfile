@@ -1,16 +1,33 @@
 FROM ruby:2.3
+RUN apt-get update -qq && apt-get install -y nodejs mysql-client
+RUN mkdir /myapp
+WORKDIR /myapp
+COPY Gemfile /myapp/Gemfile
+COPY Gemfile.lock /myapp/Gemfile.lock
+RUN bundle install
+COPY . /myapp
+
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+
+# Start the main process.
+CMD ["rails", "server", "-b", "0.0.0.0"]
+
+#FROM ruby:2.3
 #FROM buildpack-deps:stretch
 #Ruby
-#RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
-#    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
-#    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list 
+#RUN curl -sL https://deb.nodesource.com/setup_8.x \
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list 
 
-#RUN sudo apt update \
-#    && sudo apt install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
+#RUN apt-get update \
+    #&& apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
 
 #Rbenv
-#RUN cd \
-#    && git clone https://github.com/rbenv/rbenv.git ~/.rbenv \
+#RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv \
 #    && echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc \
 #    && echo 'eval "$(rbenv init -)"' >> ~/.bashrc \
 #    && exec $SHELL
@@ -29,26 +46,17 @@ FROM ruby:2.3
 #RUN curl -sL https://deb.nodesource.com/setup_8.x | -E bash - 
 #RUN apt-get install -y nodejs
 
-RUN gem install rails -v 5.2.2 #5.1.7
+#RUN gem install rails -v 5.2.2 #5.1.7
 
 #RUN rbenv rehash
 
-RUN rails -v
+#RUN rails -v
 
 #mysql
 #RUN apt-get install mysql-server mysql-client libmysqlclient-dev
 
 #EXPOSE 3000
 #CMD ["rails", "server", "-b", "0.0.0.0"]
-
-#Git
-#git config --global color.ui true
-#git config --global user.name "YOUR NAME"
-#git config --global user.email "YOUR@EMAIL.com"
-#ssh-keygen -t rsa -b 4096 -C "YOUR@EMAIL.com"
-
-#cat ~/.ssh/id_rsa.pub
-#ssh -T git@github.com
 
 #FROM ruby:2.3
 
