@@ -20,7 +20,7 @@ RUN git clone https://github.com/jamesnsmith/loggerv2.git
 WORKDIR /LoggerV2
 
 # Start the main process.
-CMD ["rails", "server"] #"-b", "0.0.0.0"
+CMD ["rails", "server", "-b", "0.0.0.0"]
 
 #####################################
 #FROM ruby:2.3
