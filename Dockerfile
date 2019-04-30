@@ -17,7 +17,7 @@ RUN rails -v
 EXPOSE 3000 3306
 
 RUN git clone https://github.com/jamesnsmith/loggerv2.git
-WORKDIR /LoggerV2
+WORKDIR /app/loggerv2
 
 # Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
