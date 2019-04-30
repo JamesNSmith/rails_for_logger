@@ -10,7 +10,7 @@ RUN bundle install
 
 # Add a script to be executed every time the container starts.
 #RUN chmod +x /usr/bin/entrypoint.sh
-#ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000 3306
 
 # Start the main process.
