@@ -1,21 +1,42 @@
 FROM ruby:2.3
+
+WORKDIR /app
+COPY . /app
+
 RUN apt-get update -qq && apt-get install -y nodejs mysql-client
-RUN mkdir /myapp
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+RUN gem install rails -v 5.2.3
+RUN gem install bundler -v 2.0.1
 RUN bundle install
-COPY . /myapp
 
 # Add a script to be executed every time the container starts.
-#COPY entrypoint.sh /usr/bin/
 #RUN chmod +x /usr/bin/entrypoint.sh
 #ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000 3306
 
 # Start the main process.
+RUN bundler -v
 RUN rails -v
 CMD ["rails", "server", "-b", "0.0.0.0"]
+
+#####################################
+#FROM ruby:2.3
+#RUN apt-get update -qq && apt-get install -y nodejs mysql-client
+#RUN mkdir /myapp
+#WORKDIR /myapp
+#COPY Gemfile /myapp/Gemfile
+#COPY Gemfile.lock /myapp/Gemfile.lock
+#RUN bundle install
+#COPY . /myapp
+
+# Add a script to be executed every time the container starts.
+#COPY entrypoint.sh /usr/bin/
+#RUN chmod +x /usr/bin/entrypoint.sh
+#ENTRYPOINT ["entrypoint.sh"]
+#EXPOSE 3000 3306
+
+# Start the main process.
+#RUN rails -v
+#CMD ["rails", "server", "-b", "0.0.0.0"]
 
 #FROM ruby:2.3#
 #FROM buildpack-deps:stretch
